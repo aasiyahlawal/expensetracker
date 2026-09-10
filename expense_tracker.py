@@ -11,7 +11,8 @@ import sqlite3
 #Exit
 
 connection = sqlite3.connect("expenses.db") #not yet created expenses database
-connection.close()
+cursor = connection.cursor()
+#connection.close()
 
 try:
     with sqlite3.connect("expenses.db") as conn:
@@ -19,3 +20,33 @@ try:
         #pass
 except sqlite3.OperationalError as error:
     print("Failed to open a database", error)    
+
+
+cursor.execute("""
+ CREATE TABLE IF NOT EXISTS Expenses (
+    id INTEGER PRIMARY KEY,
+    description TEXT,
+    amount REAL,
+    category TEXT NOT NULL,
+    date TEXT
+    )
+""")
+
+connection.commit()
+
+cursor.execute("""
+    INSERT INTO Expenses (description, amount, category, date)
+    VALUES ("Breakfast", 6.30, "Food", "05/09/2026");
+
+ """)
+
+connection.commit()
+
+cursor.execute("SELECT * FROM Expenses")
+
+expenses = cursor.fetchall()
+
+print(expenses)
+
+connection.close()
+
