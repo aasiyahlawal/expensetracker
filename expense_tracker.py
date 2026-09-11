@@ -16,8 +16,8 @@ cursor = connection.cursor()
 
 try:
     with sqlite3.connect("expenses.db") as conn:
-        print("Opened SQLite database with version {sqlite3.sqlite_version} successfully.")
-        #pass
+        #print("Opened SQLite database with version {sqlite3.sqlite_version} successfully.")
+        pass
 except sqlite3.OperationalError as error:
     print("Failed to open a database", error)    
 
@@ -44,19 +44,23 @@ connection.commit()
 
 # Add expenses function
 print("Hello welcome to your personal expenses tracker")
-description = input("Please enter a brief description of your expense: ")
-amount = float(input(f"Please enter the cost of your {description}: "))
-category = input("Please enter the category of your expense 'e.g Food, Entertainment, Transport etc': ")
-date = input("Please enter the date of your expense in DD/MM/YYYY format: ")
 
-cursor.execute("""
-    INSERT INTO Expenses (description, amount, category, date)
-    VALUES (?, ?, ?, ?); 
+def add_expenses():
+    description = input("Please enter a brief description of your expense: ")
+    amount = float(input(f"Please enter the cost of your {description}: "))
+    category = input("Please enter the category of your expense 'e.g Food, Entertainment, Transport etc': ")
+    date = input("Please enter the date of your expense in DD/MM/YYYY format: ")
 
- """,(description, amount, category, date)) #placeholders used due to sql and python having same variable names
+    cursor.execute("""
+        INSERT INTO Expenses (description, amount, category, date)
+        VALUES (?, ?, ?, ?); 
 
-connection.commit()
+    """,(description, amount, category, date)) #placeholders used due to sql and python having same variable names
 
+    connection.commit()
+
+#Run
+add_expenses()
 cursor.execute("SELECT * FROM Expenses")
 
 expenses = cursor.fetchall()
