@@ -34,11 +34,26 @@ cursor.execute("""
 
 connection.commit()
 
+#cursor.execute("""
+ #   INSERT INTO Expenses (description, amount, category, date)
+  #  VALUES ("Breakfast", 6.30, "Food", "05/09/2026");
+
+# """)
+
+connection.commit()
+
+# Add expenses function
+print("Hello welcome to your personal expenses tracker")
+description = input("Please enter a brief description of your expense: ")
+amount = float(input(f"Please enter the cost of your {description}: "))
+category = input("Please enter the category of your expense 'e.g Food, Entertainment, Transport etc': ")
+date = input("Please enter the date of your expense in DD/MM/YYYY format: ")
+
 cursor.execute("""
     INSERT INTO Expenses (description, amount, category, date)
-    VALUES ("Breakfast", 6.30, "Food", "05/09/2026");
+    VALUES (?, ?, ?, ?); 
 
- """)
+ """,(description, amount, category, date)) #placeholders used due to sql and python having same variable names
 
 connection.commit()
 
