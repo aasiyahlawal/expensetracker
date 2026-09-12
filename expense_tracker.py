@@ -70,11 +70,18 @@ def view_expenses():
     expenses = cursor.fetchall()
     print(expenses)
 
+def get_total():
+    cursor.execute("SELECT SUM(amount) FROM Expenses")    
+    total = cursor.fetchall()
+    total_price = total[0][0]
+    print(f"Total price of all expenses is {total_price}")
+    
 #Run
 add_expenses()
-#allexpenses()
-view_expenses()
 allexpenses()
+view_expenses()
+#allexpenses()
+get_total()
 
 connection.close()
 
