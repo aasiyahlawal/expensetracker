@@ -59,13 +59,22 @@ def add_expenses():
 
     connection.commit()
 
+def allexpenses():
+    cursor.execute("SELECT * FROM Expenses")
+    expenses = cursor.fetchall()
+    print(expenses)
+
+def view_expenses():
+    search_expense = input("Please enter the expense you want to search: ") 
+    cursor.execute("SELECT * FROM Expenses WHERE description = ?",(search_expense,))
+    expenses = cursor.fetchall()
+    print(expenses)
+
 #Run
 add_expenses()
-cursor.execute("SELECT * FROM Expenses")
-
-expenses = cursor.fetchall()
-
-print(expenses)
+#allexpenses()
+view_expenses()
+allexpenses()
 
 connection.close()
 
