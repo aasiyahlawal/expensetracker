@@ -75,6 +75,9 @@ def get_total():
     total = cursor.fetchall()
     total_price = total[0][0]
     print(f"Total price of all expenses is {total_price}")
+
+def update_expense():
+    pass
     
 #Run
 add_expenses()
