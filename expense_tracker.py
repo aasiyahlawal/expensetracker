@@ -77,13 +77,29 @@ def get_total():
     print(f"Total price of all expenses is {total_price}")
 
 def update_expense():
-    pass
+    allexpenses()
+    update_expense = input("Please enter the id of the expense you want to update: ")
+    updated_description = input("Please enter an updated description of your expense: ")
+    updated_amount = float(input(f"Please enter the cost of your {updated_description}: "))
+    updated_category = input("Please update the category of your expense: ")
+    updated_date = input("Please enter the date of your expense in DD/MM/YYYY format: ")
+
+    cursor.execute("""
+            UPDATE Expenses
+            SET description = ?, amount = ?, category = ?, date = ?
+            WHERE id = ?; 
+    
+        """,(updated_description, updated_amount, updated_category, updated_date, update_expense))
+
+    connection.commit()
+    allexpenses() #So user can see the expenses and the updated expense
     
 #Run
-add_expenses()
+#add_expenses()
 allexpenses()
 view_expenses()
 #allexpenses()
+update_expense()
 get_total()
 
 connection.close()
