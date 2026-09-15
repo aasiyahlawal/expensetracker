@@ -40,7 +40,7 @@ connection.commit()
 
 # """)
 
-connection.commit()
+#connection.commit()
 
 # Add expenses function
 print("Hello welcome to your personal expenses tracker")
@@ -93,14 +93,24 @@ def update_expense():
 
     connection.commit()
     allexpenses() #So user can see the expenses and the updated expense
-    
+
+def delete_expense():
+    pass
+    del_expense = input("Please enter the id of the expense you want to delete: ")
+    cursor.execute("""
+            DELETE FROM Expenses
+            WHERE id = ?;
+    """, (del_expense))
+    connection.commit()
+    allexpenses() #Testing
+
 #Run
 #add_expenses()
 allexpenses()
-view_expenses()
-#allexpenses()
-update_expense()
-get_total()
+delete_expense()
+#view_expenses()
+#update_expense()
+#get_total()
 
 connection.close()
 
