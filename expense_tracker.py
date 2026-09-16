@@ -51,10 +51,25 @@ def main_menu():
     print("-------------------")
     print("1. Add Expense")
     print("2. Search for an expense")
-    print("3. Update Expense")
-    print("4. Delete Expense")
-    print("5. Show total")
+    print("3. View all expenses")
+    print("4. Update Expense")
+    print("5. Delete Expense")
+    print("6. Show total")
 
+    menu = {
+            1 : add_expenses,
+            2: view_expenses,
+            3: allexpenses,
+            4: update_expense,
+            5: delete_expense,
+            6: get_total
+        }
+    
+    user_input = int(input("Please enter the number of the option you want to use: "))
+    menu.get(user_input, lambda: "Unknown option")()
+    #print(menu_switcher)
+
+    
 def add_expenses():
     description = input("Please enter a brief description of your expense: ")
     amount = float(input(f"Please enter the cost of your {description}: "))
@@ -114,6 +129,7 @@ def delete_expense():
     connection.commit()
     allexpenses() #Testing
 
+
 #Run
 main_menu()
 #add_expenses()
@@ -125,4 +141,5 @@ main_menu()
 #get_total()
 
 connection.close()
+
 
