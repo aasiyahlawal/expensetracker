@@ -45,6 +45,16 @@ connection.commit()
 # Add expenses function
 print("Hello welcome to your personal expenses tracker")
 
+#Main
+def main_menu():
+    print("Main Menu")
+    print("-------------------")
+    print("1. Add Expense")
+    print("2. Search for an expense")
+    print("3. Update Expense")
+    print("4. Delete Expense")
+    print("5. Show total")
+
 def add_expenses():
     description = input("Please enter a brief description of your expense: ")
     amount = float(input(f"Please enter the cost of your {description}: "))
@@ -105,9 +115,11 @@ def delete_expense():
     allexpenses() #Testing
 
 #Run
+main_menu()
 #add_expenses()
-allexpenses()
-delete_expense()
+#main_menu()
+#allexpenses()
+#delete_expense()
 #view_expenses()
 #update_expense()
 #get_total()
